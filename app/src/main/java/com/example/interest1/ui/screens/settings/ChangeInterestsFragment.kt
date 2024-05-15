@@ -15,7 +15,7 @@ class ChangeInterestsFragment : BaseChangeFragment(R.layout.fragment_change_inte
     private val pathSwimming = REF_DATABASE_ROOT.child(NODE_USERS).child(CURRENT_UID).child(CHILD_SWIMMING)
 
     override fun onResume() {
-         super.onResume()
+        super.onResume()
         initFields()
     }
 
