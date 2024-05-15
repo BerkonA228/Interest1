@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "300180279119",
+    "firebase_url": "https://interest-d50eb-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "interest-d50eb",
+    "storage_bucket": "interest-d50eb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:300180279119:android:040d53086746922b43ff3a",
+        "android_client_info": {
+          "package_name": "com.example.interest1"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDXMWvuz5HUH4vMmzg1WRbbbm4WuqOYH1U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

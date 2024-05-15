@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.screens.settings.ChangeInterestsFragment">
+
+    <TextView
+        android:id="@+id/choose_interests_text"
+        android:layout_width="match_parent"
+        android:text="@string/choose_interests_text"
+        android:layout_marginBottom="@dimen/app_margin"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorPrimary"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:textStyle="bold"
+        android:textSize="24sp" />
+
+    <TextView
+        android:id="@+id/interest_fishing"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/app_margin"
+        android:textColor = "@color/colorBlack"
+        app:layout_constraintStart_toStartOf="parent"
+        android:textSize="20sp"
+        android:text="Рыбалка"
+        app:layout_constraintTop_toBottomOf="@id/choose_interests_text"/>
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/interest_fishing_choice"
+        android:layout_width="20dp"
+        android:src="@drawable/ic_choice"
+        android:background="@color/colorWhite"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@+id/interest_fishing"
+        app:layout_constraintStart_toEndOf="@+id/interest_fishing"
+        android:layout_height="20dp"/>
+    <TextView
+        android:id="@+id/interest_traveling"
+        android:layout_width="wrap_content"
+        android:layout_marginTop="@dimen/app_margin"
+        android:layout_height="wrap_content"
+        android:textColor = "@color/colorBlack"
+        app:layout_constraintStart_toStartOf="parent"
+        android:textSize="20sp"
+        android:text="Путешествия"
+        app:layout_constraintTop_toBottomOf="@id/interest_fishing"/>
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/interest_traveling_choice"
+        android:layout_width="20dp"
+        android:src="@drawable/ic_choice"
+        android:background="@color/colorWhite"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@+id/interest_traveling"
+        app:layout_constraintStart_toEndOf="@+id/interest_traveling"
+        android:layout_height="20dp"/>
+    <TextView
+        android:id="@+id/interest_swimming"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor = "@color/colorBlack"
+        android:layout_marginTop="@dimen/app_margin"
+        app:layout_constraintStart_toStartOf="parent"
+        android:textSize="20sp"
+        android:text="Плавание"
+        app:layout_constraintTop_toBottomOf="@id/interest_traveling"/>
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/interest_swimming_choice"
+        android:layout_width="20dp"
+        android:src="@drawable/ic_choice"
+        android:background="@color/colorWhite"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@+id/interest_swimming"
+        app:layout_constraintStart_toEndOf="@+id/interest_swimming"
+        android:layout_height="20dp"/>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

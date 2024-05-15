@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_margin="@dimen/app_margin"
+    style="@style/settings_buttons"
+    android:layout_height="wrap_content">
+
+
+
+    <TextView
+        android:id="@+id/interest_item_name"
+        style="@style/normalText"
+        app:layout_constraintStart_toStartOf="parent"
+        android:textSize="20sp"
+        tools:text="Название интереса"
+        app:layout_constraintTop_toTopOf="parent"/>
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/add_contacts_item_choice"
+        android:layout_width="20dp"
+        android:src="@drawable/ic_choice"
+        android:background="@color/colorWhite"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@+id/interest_item_name"
+        app:layout_constraintStart_toEndOf="@+id/interest_item_name"
+        android:layout_height="20dp"/>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
