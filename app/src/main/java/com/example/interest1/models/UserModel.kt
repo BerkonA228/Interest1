@@ -7,8 +7,5 @@ data class UserModel(
     var fullname: String = "",
     var state: String = "",
     var phone: String = "",
-    var photoUrl: String = "empty",
-    var interest_fishing: Boolean = false,
-    var interest_traveling: Boolean = false,
-    var interest_swimming: Boolean = false
+    var photoUrl: String = "empty"
 )

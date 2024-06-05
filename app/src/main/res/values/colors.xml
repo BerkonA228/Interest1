@@ -10,6 +10,8 @@
     <color name="colorLightGrey">#AFAEAE</color>
     <color name="colorLightBlue">#6DB4E4</color>
     <color name="colorBlue">#B0C9F3</color>
+    <color name="colorConfirm">#4CAF50</color>
+    <color name="colorConfirmDark">#388E3C</color>
 
     <!-- Material DEFAULT colors -->
     <color name="material_drawer_primary">#2196F3</color>

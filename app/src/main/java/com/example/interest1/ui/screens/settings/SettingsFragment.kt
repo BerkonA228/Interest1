@@ -8,6 +8,7 @@ import android.view.MenuItem
 import com.example.interest1.R
 import com.example.interest1.database.*
 import com.example.interest1.ui.screens.base.BaseFragment
+import com.example.interest1.ui.screens.settings.interests.ChangeInterestsFragment
 import com.example.interest1.utilits.*
 import com.theartofdev.edmodo.cropper.CropImage
 import com.theartofdev.edmodo.cropper.CropImageView

@@ -22,7 +22,7 @@ class GroupChatAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        (holder as MessageHolder).drawMessage(mListMessagesCache[position])
+        (holder as MessageHolder).drawMessage(mListMessagesCache[position], isGroup = true)
     }
 
     override fun onViewAttachedToWindow(holder: RecyclerView.ViewHolder) {

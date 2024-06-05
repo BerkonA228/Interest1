@@ -11,6 +11,7 @@ import com.example.interest1.ui.screens.settings.SettingsFragment
 import com.example.interest1.utilits.APP_ACTIVITY
 import com.example.interest1.database.USER
 import com.example.interest1.ui.screens.groups.AddContactsFragment
+import com.example.interest1.ui.screens.profile.ProfileFragment
 import com.example.interest1.utilits.downloadAndSetImage
 import com.example.interest1.utilits.replaceFragment
 import com.mikepenz.materialdrawer.AccountHeader
@@ -72,13 +73,9 @@ class AppDrawer {
                     .withSelectable(false),
                 PrimaryDrawerItem().withIdentifier(102)
                     .withIconTintingEnabled(true)
-                    .withName("Избранное")
+                    .withName("Просмотр анкет")
                     .withSelectable(false),
                 PrimaryDrawerItem().withIdentifier(103)
-                    .withIconTintingEnabled(true)
-                    .withName("Пригласить друзей")
-                    .withSelectable(false),
-                PrimaryDrawerItem().withIdentifier(104)
                     .withIconTintingEnabled(true)
                     .withName("Настройки")
                     .withSelectable(false)
@@ -97,8 +94,9 @@ class AppDrawer {
     private fun clickToItem(position:Int){
         when (position) {
             1 -> replaceFragment(AddContactsFragment())
-            5 -> replaceFragment(SettingsFragment())
             2 -> replaceFragment(ContactsFragment())
+            3 -> replaceFragment(ProfileFragment())
+            4 -> replaceFragment(SettingsFragment())
         }
     }
 

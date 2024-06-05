@@ -166,6 +166,7 @@ fun uploadFileToStorage(
     val path = REF_STORAGE_ROOT.child(FOLDER_FILES).child(messageKey)
     putFileToStorage(uri, path) {
         getUrlFromStorage(path) {
+            println(it)
             sendMessageAsFile(receivedID, it, messageKey, typeMessage, filename)
         }
     }
@@ -299,6 +300,46 @@ fun addGroupToMainList(
         .addOnFailureListener { showToast(it.message.toString()) }
 }
 
+fun uploadFileToGroupStorage(
+    uri: Uri,
+    messageKey: String,
+    groupId: String,
+    typeMessage: String,
+    filename: String = ""
+) {
+    val path = REF_STORAGE_ROOT.child(FOLDER_FILES).child(messageKey)
+    putFileToStorage(uri, path) {
+        getUrlFromStorage(path) {
+            println(it)
+            sendMessageGroupAsFile(groupId, it, messageKey, typeMessage, filename)
+        }
+    }
+}
+
+fun sendMessageGroupAsFile(
+    groupId: String,
+    fileUrl: String,
+    messageKey: String,
+    typeMessage: String,
+    filename: String
+) {
+    val refMessages = "$NODE_GROUPS/$groupId/$NODE_MESSAGES"
+
+
+    val mapMessage = hashMapOf<String, Any>()
+    mapMessage[CHILD_FROM] = CURRENT_UID
+    mapMessage[CHILD_TYPE] = typeMessage
+    mapMessage[CHILD_TEXT] = filename
+    mapMessage[CHILD_ID] = messageKey
+    mapMessage[CHILD_TIMESTAMP] = ServerValue.TIMESTAMP
+    mapMessage[CHILD_FILE_URL] = fileUrl
+
+    REF_DATABASE_ROOT.child(refMessages).child(messageKey)
+        .updateChildren(mapMessage)
+        .addOnFailureListener { showToast(it.message.toString()) }
+}
+
+
 fun sendMessageToGroup(message: String, groupId: String, typeText: String, function: () -> Unit) {
 
     val refMessages = "$NODE_GROUPS/$groupId/$NODE_MESSAGES"
@@ -318,5 +359,17 @@ fun sendMessageToGroup(message: String, groupId: String, typeText: String, funct
         .updateChildren(mapMessage)
         .addOnSuccessListener { function() }
         .addOnFailureListener { showToast(it.message.toString()) }
+}
+
+fun getFullNameById(id: String, function: (String) -> Unit) {
+    REF_DATABASE_ROOT.child(NODE_USERS).child(id).child(CHILD_FULLNAME).addListenerForSingleValueEvent(AppValueEventListener{
+        function(it.value.toString())
+    })
+}
+
+fun getPhotoUrlById(id: String, function: (String) -> Unit) {
+    REF_DATABASE_ROOT.child(NODE_USERS).child(id).child(CHILD_PHOTO_URL).addListenerForSingleValueEvent(AppValueEventListener{
+        function(it.value.toString())
+    })
 }
 

@@ -9,14 +9,17 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.example.interest1.database.CURRENT_UID
 import com.example.interest1.database.getFileFromStorage
+import com.example.interest1.database.getFullNameById
+import com.example.interest1.database.getPhotoUrlById
 import com.example.interest1.ui.message_recycler_view.views.MessageView
 import com.example.interest1.utilits.WRITE_FILES
 import com.example.interest1.utilits.asTime
 import com.example.interest1.utilits.checkPermission
+import com.example.interest1.utilits.downloadAndSetImage
 import com.example.interest1.utilits.showToast
+import de.hdodenhof.circleimageview.CircleImageView
 import kotlinx.android.synthetic.main.message_item_file.view.*
 import java.io.File
-import java.lang.Exception
 
 class HolderFileMessage(view: View) : RecyclerView.ViewHolder(view), MessageHolder {
 
@@ -32,7 +35,10 @@ class HolderFileMessage(view: View) : RecyclerView.ViewHolder(view), MessageHold
     private val chatReceivedBtnDownload: ImageView = view.chat_received_btn_download
     private val chatReceivedProgressBar: ProgressBar = view.chat_received_progress_bar
 
-    override fun drawMessage(view: MessageView) {
+    private val chatReceivedPhoto: CircleImageView = view.chat_received_photo
+    private val chatReceivedName: TextView = view.chat_received_name
+
+    override fun drawMessage(view: MessageView, isGroup: Boolean) {
         if (view.from == CURRENT_UID) {
             blocReceivedFileMessage.visibility = View.GONE
             blocUserFileMessage.visibility = View.VISIBLE
@@ -43,6 +49,20 @@ class HolderFileMessage(view: View) : RecyclerView.ViewHolder(view), MessageHold
             blocUserFileMessage.visibility = View.GONE
             chatReceivedFileMessageTime.text = view.timeStamp.asTime()
             chatReceivedFilename.text = view.text
+            if (isGroup) {
+                getFullNameById(view.from) { fullName ->
+                    chatReceivedName.text = fullName
+                }
+                getPhotoUrlById(view.from) {
+                    chatReceivedPhoto.downloadAndSetImage(it)
+                }
+                chatReceivedPhoto.visibility = View.VISIBLE
+                chatReceivedName.visibility = View.VISIBLE
+            }
+            else {
+                chatReceivedPhoto.visibility = View.GONE
+                chatReceivedName.visibility = View.GONE
+            }
         }
     }
 

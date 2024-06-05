@@ -12,9 +12,7 @@ lateinit var REF_STORAGE_ROOT: StorageReference
 lateinit var USER: UserModel
 const val TYPE_TEXT = "text"
 const val NODE_INTERESTS = "interests"
-const val CHILD_FISHING = "interest_fishing"
-const val CHILD_TRAVELING = "interest_traveling"
-const val CHILD_SWIMMING = "interest_swimming"
+const val NODE_REQUESTS = "requests"
 const val NODE_USERS = "users"
 const val NODE_MESSAGES = "messages"
 const val NODE_USERNAMES = "usernames"

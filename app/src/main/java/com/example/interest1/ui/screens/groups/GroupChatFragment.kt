@@ -88,8 +88,8 @@ class GroupChatFragment(private val group: CommonModel) : BaseFragment(R.layout.
                         //stopRecord
                         chat_input_message.setText("")
                         chat_btn_voice.colorFilter = null
-                        mAppVoiceRecorder.stopRecord(){ file,messageKey ->
-                            uploadFileToStorage(Uri.fromFile(file),messageKey,group.id, TYPE_MESSAGE_VOICE)
+                        mAppVoiceRecorder.stopRecord{ file,messageKey ->
+                            uploadFileToGroupStorage(Uri.fromFile(file),messageKey,group.id, TYPE_MESSAGE_VOICE)
                             mSmoothScrollToPosition = true
                         }
                     }
@@ -194,15 +194,9 @@ class GroupChatFragment(private val group: CommonModel) : BaseFragment(R.layout.
     }
 
     private fun initInfoToolbar() {
-        if (mReceivingUser.fullname.isEmpty()){
-            mToolbarInfo.toolbar_chat_fullname.text = group.fullname
-
-        } else {
-            mToolbarInfo.toolbar_chat_fullname.text = mReceivingUser.fullname
-
-        }
-        mToolbarInfo.toolbar_chat_image.downloadAndSetImage(mReceivingUser.photoUrl)
-        mToolbarInfo.toolbar_chat_status.text = mReceivingUser.state
+        mToolbarInfo.toolbar_chat_fullname.text = group.fullname
+        mToolbarInfo.toolbar_chat_image.downloadAndSetImage(group.photoUrl)
+        mToolbarInfo.toolbar_chat_status.text = ""
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -212,7 +206,7 @@ class GroupChatFragment(private val group: CommonModel) : BaseFragment(R.layout.
                 CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE -> {
                     val messageKey = getMessageKey(group.id)
                     val uri = CropImage.getActivityResult(data).uri
-                    uploadFileToStorage(uri,messageKey,group.id, TYPE_MESSAGE_IMAGE)
+                    uploadFileToGroupStorage(uri, messageKey, group.id, TYPE_MESSAGE_IMAGE)
                     mSmoothScrollToPosition = true
                 }
 
@@ -220,7 +214,7 @@ class GroupChatFragment(private val group: CommonModel) : BaseFragment(R.layout.
                     val uri = data.data
                     val messageKey = getMessageKey(group.id)
                     val filename = getFilenameFromUri(uri!!)
-                    uploadFileToStorage(uri,messageKey,group.id, TYPE_MESSAGE_FILE,filename)
+                    uploadFileToGroupStorage(uri,messageKey,group.id, TYPE_MESSAGE_FILE,filename)
                     mSmoothScrollToPosition = true
                 }
             }

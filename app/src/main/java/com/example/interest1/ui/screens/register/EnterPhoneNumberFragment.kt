@@ -1,12 +1,13 @@
 package com.example.interest1.ui.screens.register
 
 import androidx.fragment.app.Fragment
-
 import com.example.interest1.R
 import com.example.interest1.database.AUTH
 import com.example.interest1.utilits.*
 import com.google.firebase.FirebaseException
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.PhoneAuthCredential
+import com.google.firebase.auth.PhoneAuthOptions
 import com.google.firebase.auth.PhoneAuthProvider
 import kotlinx.android.synthetic.main.fragment_enter_phone_number.*
 import java.util.concurrent.TimeUnit
@@ -25,7 +26,9 @@ class EnterPhoneNumberFragment : Fragment(R.layout.fragment_enter_phone_number) 
                     if (task.isSuccessful){
                         showToast("Добро Пожаловать")
                         restartActivity()
-                    } else showToast(task.exception?.message.toString())
+                    } else {
+                        showToast(task.exception?.message.toString())
+                    }
                 }
             }
 
@@ -50,12 +53,12 @@ class EnterPhoneNumberFragment : Fragment(R.layout.fragment_enter_phone_number) 
 
     private fun authUser() {
         mPhoneNumber = register_input_phone_number.text.toString()
-        PhoneAuthProvider.getInstance().verifyPhoneNumber(
-            mPhoneNumber,
-            10,
-            TimeUnit.SECONDS,
-            APP_ACTIVITY,
-            mCallBack
-        )
+        val options = PhoneAuthOptions.newBuilder(FirebaseAuth.getInstance())
+            .setPhoneNumber(mPhoneNumber)
+            .setTimeout(60L, TimeUnit.SECONDS)
+            .setActivity(APP_ACTIVITY)
+            .setCallbacks(mCallBack)
+            .build()
+        PhoneAuthProvider.verifyPhoneNumber(options)
     }
 }

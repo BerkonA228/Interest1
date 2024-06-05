@@ -5,13 +5,21 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-
 import com.example.interest1.R
-import com.example.interest1.database.*
+import com.example.interest1.database.CURRENT_UID
+import com.example.interest1.database.NODE_PHONES_CONTACTS
+import com.example.interest1.database.NODE_REQUESTS
+import com.example.interest1.database.NODE_USERS
+import com.example.interest1.database.REF_DATABASE_ROOT
+import com.example.interest1.database.getCommonModel
 import com.example.interest1.models.CommonModel
 import com.example.interest1.ui.screens.base.BaseFragment
+import com.example.interest1.ui.screens.request.RequestFragment
 import com.example.interest1.ui.screens.single_chat.SingleChatFragment
-import com.example.interest1.utilits.*
+import com.example.interest1.utilits.APP_ACTIVITY
+import com.example.interest1.utilits.AppValueEventListener
+import com.example.interest1.utilits.downloadAndSetImage
+import com.example.interest1.utilits.replaceFragment
 import com.firebase.ui.database.FirebaseRecyclerAdapter
 import com.firebase.ui.database.FirebaseRecyclerOptions
 import com.google.firebase.database.DatabaseReference
@@ -32,7 +40,21 @@ class ContactsFragment : BaseFragment(R.layout.fragment_contacts) {
     override fun onResume() {
         super.onResume()
         APP_ACTIVITY.title = "Контакты"
+        checkRequests()
         initRecycleView()
+        item_request.setOnClickListener {
+            replaceFragment(RequestFragment())
+        }
+    }
+
+    private fun checkRequests() {
+        REF_DATABASE_ROOT.child(NODE_REQUESTS).child(CURRENT_UID).addListenerForSingleValueEvent(AppValueEventListener { requests ->
+            val count = requests.children.count()
+            if (count > 0) {
+                item_counter.text = count.toString()
+                item_request.visibility = View.VISIBLE
+            }
+        })
     }
 
     private fun initRecycleView() {
